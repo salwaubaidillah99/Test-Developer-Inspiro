@@ -20,7 +20,9 @@ class VendingMachine {
 
         this.saldo = 0;
         this.item = "";
-    }masukkanUang(uang) {
+    }
+    
+    masukkanUang(uang) {
         const uangValid = [2000, 5000, 10000, 20000, 50000];
 
         if (uangValid.includes(uang)) {
@@ -35,14 +37,18 @@ class VendingMachine {
         this.item = item; 
 
         if (!(item in this.daftarHargaMakanan)) {
-            console.log("Item tidak tersedia.");
-            return;
-        }
+            console.log("Item tidak tersedia. Silakan pilih item yang tersedia.");
+            this.tampilkanItem();
+            rl.question("Masukkan item yang ingin dibeli: ", (itemTerpilih) => {
+            this.beliItem(itemTerpilih.trim());
+        });
+        return;
+    }
 
-        if (this.stock[item] === 0) {
-            console.log(`${item} stock habis.`);
-            return;
-        }
+    if (this.stock[item] === 0) {
+        console.log(`${item} stock habis.`);
+        return;
+    }
 
         const harga = this.daftarHargaMakanan[item];
 
@@ -127,6 +133,10 @@ class VendingMachine {
                     this.beliItem(itemTerpilih);
                 });
             } else {
+                if(this.saldo > 0){
+                    console.log(`uang kembalian anda : ${this.saldo}`);
+                    this.kembalikanUang;
+                }
                 console.log("Terima kasih sudah belanja.");
                 rl.close(); 
             }
