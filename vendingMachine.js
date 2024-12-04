@@ -117,12 +117,14 @@ class VendingMachine {
 
     tampilkanItem() {
         console.log("Daftar item yang tersedia:");
+        console.log("===================================");
         for (const item in this.daftarHargaMakanan) {
             const jumlahStok = this.stock[item];
             const status = jumlahStok > 0 ? "Tersedia" : "Stok habis";
             const stokHabis = jumlahStok > 0 ? "" : " - Stok habis";
             console.log(`${item} - Harga: ${this.daftarHargaMakanan[item]}, ${status}${stokHabis}`);
         }
+        console.log("===================================");
     }
 
     tanyaBeliLagi() {
@@ -134,10 +136,12 @@ class VendingMachine {
                 });
             } else {
                 if(this.saldo > 0){
+                    console.log("===================================");
                     console.log(`uang kembalian anda : ${this.saldo}`);
                     this.kembalikanUang;
                 }
                 console.log("Terima kasih sudah belanja.");
+                console.log("===================================");
                 rl.close(); 
             }
         });
@@ -163,7 +167,6 @@ function jalankanMesinPenjual() {
             rl.close();
             return;
         }
-
         rl.question("Masukkan item yang ingin Anda beli (Biskuit, Chips, Oreo, Tango, Cokelat): ", (itemTerpilih) => {
             itemTerpilih = itemTerpilih.trim();
 
